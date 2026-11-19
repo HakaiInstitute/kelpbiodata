@@ -1,0 +1,10 @@
+citHeader("To cite kelpbiodata in publications use:")
+
+bibentry(
+  bibtype = "Manual",
+  title   = "kelpbiodata: Kelp Biomass Data and Reference Fits for 'kelpbio'",
+  author  = person("Seb", "Dalgarno"),
+  year    = "2026",
+  note    = sprintf("R package version %s", meta$Version),
+  url     = "https://github.com/HakaiInstitute/kelpbiodata"
+)

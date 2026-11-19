@@ -1,0 +1,15 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.github$
+^data-raw$
+^docs$
+^README\.html$
+^pkgdown$
+^scripts$
+^LICENSE\.md$
+^_pkgdown\.yml$
+^README\.Rmd$
+^\.claude$
+^jarl\.toml$
+^[.]?air[.]toml$
+^\.vscode$
