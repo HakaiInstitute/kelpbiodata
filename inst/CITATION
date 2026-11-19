@@ -1,10 +1,55 @@
-citHeader("To cite kelpbiodata in publications use:")
+citHeader(
+  "To cite kelpbiodata in publications, cite the package and the data packages",
+  "its datasets are built from:"
+)
 
 bibentry(
   bibtype = "Manual",
-  title   = "kelpbiodata: Kelp Biomass Data and Reference Fits for 'kelpbio'",
+  title   = "kelpbiodata: Kelp Biomass Data and Reference Model Fits for 'kelpbio'",
   author  = person("Seb", "Dalgarno"),
   year    = "2026",
   note    = sprintf("R package version %s", meta$Version),
   url     = "https://github.com/HakaiInstitute/kelpbiodata"
+)
+
+bibentry(
+  bibtype = "Misc",
+  title   = "Nereocystis kelp canopy productivity data from BC Central Coast",
+  author  = c(
+    person("Ondine", "Pontier"),
+    person("Jenn", "Burt"),
+    person("Daniel", "Okamoto"),
+    person("Margot", "Hessing-Lewis")
+  ),
+  year    = "2026",
+  note    = "Version 1.3.0",
+  howpublished = "Hakai Institute dataset",
+  doi     = "10.21966/d1s2-s530"
+)
+
+bibentry(
+  bibtype = "Misc",
+  title   = "Macrocystis kelp canopy productivity data from BC Central Coast",
+  author  = c(
+    person("Ondine", "Pontier"),
+    person("Kira", "Krumhansl"),
+    person("Margot", "Hessing-Lewis")
+  ),
+  year    = "2026",
+  note    = "Version 1.4.0",
+  howpublished = "Hakai Institute dataset",
+  doi     = "10.21966/k88j-1k50"
+)
+
+bibentry(
+  bibtype = "Misc",
+  title   = paste(
+    "Time series of surface kelp canopy area derived from remotely piloted",
+    "aerial systems (RPAS, or drone) surveys, Central Coast, British Columbia"
+  ),
+  author  = c(person("Luba", "Reshitnyk"), person("Keith", "Holmes")),
+  year    = "2025",
+  note    = "Version 1.0",
+  howpublished = "Hakai Institute dataset",
+  doi     = "10.21966/9cbv-ra30"
 )

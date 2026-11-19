@@ -11,9 +11,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 kelpbiodata holds field survey datasets for *Nereocystis luetkeana* and
-*Macrocystis pyrifera*, and reference models fitted to them with the
+*Macrocystis pyrifera* from the Hakai Institute in British Columbia, and
+reference models fitted to them with the
 [kelpbio](https://github.com/HakaiInstitute/kelpbio) package. See the
-kelpbio documentation for the models and how to use the fits.
+kelpbio documentation for the models and how to use the fits. Sites are
+identified by code (`HAK001`, …).
 
 ## Installation
 
@@ -44,6 +46,48 @@ data <- dplyr::bind_rows(kelpbiodata::data_weight_hakai_nereo, new)
 fit <- kelpbio::kb_fit_weight_nereo(data)
 ```
 
-Rows with the same site name are the same site: a new year of data at a
-reference site shares its site effect. Sites that only share a name with
-a reference site need a prefix, as in `"MyProgramme:Cove"`.
+Rows with the same site are the same site: a new year of data at a
+reference site, under its code, shares its site effect. A prefix, as in
+`"MyProgramme:Cove"`, keeps new sites apart from the reference sites.
+
+## Citation
+
+If you use kelpbiodata in your work, please cite it and the Hakai
+Institute data packages its datasets are built from. Use `citation()` to
+get formatted citations and BibTeX entries:
+
+``` r
+citation("kelpbiodata")
+#> To cite kelpbiodata in publications, cite the package and the data
+#> packages its datasets are built from:
+#> 
+#>   Dalgarno S (2026). _kelpbiodata: Kelp Biomass Data and Reference
+#>   Model Fits for 'kelpbio'_. R package version 0.0.0.9000,
+#>   <https://github.com/HakaiInstitute/kelpbiodata>.
+#> 
+#>   Pontier O, Burt J, Okamoto D, Hessing-Lewis M (2026). "Nereocystis
+#>   kelp canopy productivity data from BC Central Coast." Hakai Institute
+#>   dataset. doi:10.21966/d1s2-s530 <https://doi.org/10.21966/d1s2-s530>.
+#>   Version 1.3.0.
+#> 
+#>   Pontier O, Krumhansl K, Hessing-Lewis M (2026). "Macrocystis kelp
+#>   canopy productivity data from BC Central Coast." Hakai Institute
+#>   dataset. doi:10.21966/k88j-1k50 <https://doi.org/10.21966/k88j-1k50>.
+#>   Version 1.4.0.
+#> 
+#>   Reshitnyk L, Holmes K (2025). "Time series of surface kelp canopy
+#>   area derived from remotely piloted aerial systems (RPAS, or drone)
+#>   surveys, Central Coast, British Columbia." Hakai Institute dataset.
+#>   doi:10.21966/9cbv-ra30 <https://doi.org/10.21966/9cbv-ra30>. Version
+#>   1.0.
+#> 
+#> To see these entries in BibTeX format, use 'print(<citation>,
+#> bibtex=TRUE)', 'toBibtex(.)', or set
+#> 'options(citation.bibtex.max=999)'.
+```
+
+## Licensing
+
+Copyright 2026 Tula Foundation.
+
+The code and data are released under the [MIT License](LICENSE.md).

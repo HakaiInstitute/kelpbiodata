@@ -4,9 +4,9 @@
 \name{kelpbiodata-package}
 \alias{kelpbiodata}
 \alias{kelpbiodata-package}
-\title{kelpbiodata: Kelp Biomass Data and Reference Fits for 'kelpbio'}
+\title{kelpbiodata: Kelp Biomass Data and Reference Model Fits for 'kelpbio'}
 \description{
-Field survey datasets for Nereocystis luetkeana and Macrocystis pyrifera, and models fitted to them with the 'kelpbio' package. The reference fits can be used in place of fitting a sub-model to new data.
+Field survey datasets for Nereocystis luetkeana and Macrocystis pyrifera from the Hakai Institute in British Columbia, and models fitted to them with the 'kelpbio' package.
 }
 \seealso{
 Useful links:
@@ -28,6 +28,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Tula Foundation [funder, copyright holder]
+  \item Hakai Institute [data contributor]
 }
 
 }
