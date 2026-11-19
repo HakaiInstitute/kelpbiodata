@@ -25,6 +25,11 @@ Diameters and wet weights of plants harvested by the Hakai Institute in
 British Columbia after day of year 140, measured at the maximum sub-bulb
 diameter, one row per plant.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \link{fit_weight_hakai_nereo} for the fit to this dataset.
 

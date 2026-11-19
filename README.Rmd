@@ -58,6 +58,11 @@ Rows with the same site are the same site: a new year of data at a reference
 site, under its code, shares its site effect. A prefix, as in
 `"MyProgramme:Cove"`, keeps new sites apart from the reference sites.
 
+## Attribution
+
+`r kelpbiodata::kelpbiodata_attribution()`
+The statement is also returned by `kelpbiodata_attribution()`.
+
 ## Citation
 
 If you use kelpbiodata in your work, please cite it and the Hakai Institute

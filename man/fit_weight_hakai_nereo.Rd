@@ -17,6 +17,11 @@ A fit of \code{kelpbio::kb_fit_weight_nereo()} to plants harvested by the Hakai
 Institute in British Columbia after day of year 140, measured at the maximum
 sub-bulb diameter.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \code{kelpbio::kb_fit_weight_nereo()} and \link{data_weight_hakai_nereo} for
 the data.

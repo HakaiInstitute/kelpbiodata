@@ -22,6 +22,11 @@ every plant counted on its transects with at least one frond at 1 m; the
 plants of site \code{"HAK012"} take the weight effect of \code{"HAK042"}, one of its
 two plots.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \code{kelpbio::kb_fit_cover_calibration_macro()},
 \link{data_in_situ_hakai_macro} for the surveys, and

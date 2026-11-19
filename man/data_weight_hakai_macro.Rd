@@ -24,6 +24,11 @@ data_weight_hakai_macro
 Frond counts and wet weights of plants harvested by the Hakai Institute in
 British Columbia, one row per plant.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \link{fit_weight_hakai_macro} for the fit to this dataset.
 

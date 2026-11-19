@@ -26,6 +26,11 @@ Every plant with at least one frond at 1 m above the holdfast counted on the
 density transects of the surveys in \link{data_in_situ_hakai_macro}, one row per
 plant.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \link{fit_cover_calibration_hakai_macro}, calibrated to the biomass of
 these surveys.

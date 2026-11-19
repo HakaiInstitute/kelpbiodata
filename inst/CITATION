@@ -53,3 +53,10 @@ bibentry(
   howpublished = "Hakai Institute dataset",
   doi     = "10.21966/9cbv-ra30"
 )
+
+citFooter(
+  "The Hakai Institute data in this package were collected in collaboration",
+  "with the Heiltsuk First Nation on Heiltsuk territory. Please credit the",
+  "Heiltsuk Integrated Resource Management Department and the Hakai Institute",
+  "in any outputs that use these data."
+)

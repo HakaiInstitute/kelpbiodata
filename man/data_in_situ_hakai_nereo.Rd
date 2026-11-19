@@ -34,6 +34,11 @@ flight, one row per survey (one per site-year), including surveys with no
 plants counted. Surveys in site-years whose plants were sized only by
 cumulative blade length are excluded.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \link{fit_cover_calibration_hakai_nereo}, calibrated to the biomass of
 these surveys.

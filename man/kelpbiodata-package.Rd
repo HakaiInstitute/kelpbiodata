@@ -27,8 +27,8 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Tula Foundation [funder, copyright holder]
-  \item Hakai Institute [data contributor]
+  \item Tula Foundation (Hakai Institute) [funder, copyright holder, data contributor]
+  \item Heiltsuk Integrated Resource Management Department [data contributor]
 }
 
 }

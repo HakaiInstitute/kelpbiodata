@@ -34,6 +34,11 @@ with a survey of each a year; every other site has one survey a year. The
 plants each survey counted are listed in \link{data_size_census_hakai_macro}.
 Sites are identified by code.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \link{fit_cover_calibration_hakai_macro}, calibrated to the biomass of
 these surveys.

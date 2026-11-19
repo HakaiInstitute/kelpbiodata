@@ -22,6 +22,11 @@ fitting a calibration. Each survey's wet biomass per m² is predicted by
 in site-years whose plants were sized only by cumulative blade length are
 excluded.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \code{kelpbio::kb_fit_cover_calibration_nereo()} and
 \link{data_in_situ_hakai_nereo} for the surveys.

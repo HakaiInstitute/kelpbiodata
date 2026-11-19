@@ -13,3 +13,4 @@
 ^jarl\.toml$
 ^[.]?air[.]toml$
 ^\.vscode$
+^man-roxygen$

@@ -50,6 +50,14 @@ Rows with the same site are the same site: a new year of data at a
 reference site, under its code, shares its site effect. A prefix, as in
 `"MyProgramme:Cove"`, keeps new sites apart from the reference sites.
 
+## Attribution
+
+The Hakai Institute data in this package were collected in collaboration
+with the Heiltsuk First Nation on Heiltsuk territory. Please credit the
+Heiltsuk Integrated Resource Management Department and the Hakai
+Institute in any outputs that use these data. The statement is also
+returned by `kelpbiodata_attribution()`.
+
 ## Citation
 
 If you use kelpbiodata in your work, please cite it and the Hakai
@@ -80,6 +88,11 @@ citation("kelpbiodata")
 #>   surveys, Central Coast, British Columbia." Hakai Institute dataset.
 #>   doi:10.21966/9cbv-ra30 <https://doi.org/10.21966/9cbv-ra30>. Version
 #>   1.0.
+#> 
+#> The Hakai Institute data in this package were collected in
+#> collaboration with the Heiltsuk First Nation on Heiltsuk territory.
+#> Please credit the Heiltsuk Integrated Resource Management Department
+#> and the Hakai Institute in any outputs that use these data.
 #> 
 #> To see these entries in BibTeX format, use 'print(<citation>,
 #> bibtex=TRUE)', 'toBibtex(.)', or set

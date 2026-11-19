@@ -26,6 +26,9 @@ reference:
     - data_carbon_hakai_macro
     - data_nitrogen_hakai_nereo
     - data_nitrogen_hakai_macro
+- title: "Attribution"
+  contents:
+    - kelpbiodata_attribution
 - title: "Reference fits"
   desc: "Models fitted with kelpbio to Hakai Institute data."
   contents:

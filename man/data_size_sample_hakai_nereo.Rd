@@ -23,6 +23,11 @@ data_size_sample_hakai_nereo
 Maximum sub-bulb diameters measured in July and August, the peak season, in
 Hakai Institute surveys in British Columbia, one row per plant.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \link{fit_size_hakai_nereo} for the fit to this dataset.
 

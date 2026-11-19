@@ -10,6 +10,7 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_carbon_macro()` and [data_carbon_hakai_macro] for
 #'   the data.
+#' @template attribution
 #' @family reference fits
 "fit_carbon_hakai_macro"
 
@@ -25,6 +26,7 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_carbon_nereo()` and [data_carbon_hakai_nereo] for
 #'   the data.
+#' @template attribution
 #' @family reference fits
 "fit_carbon_hakai_nereo"
 
@@ -46,6 +48,7 @@
 #' @seealso `kelpbio::kb_fit_cover_calibration_macro()`,
 #'   [data_in_situ_hakai_macro] for the surveys, and
 #'   [data_size_census_hakai_macro] for their plants.
+#' @template attribution
 #' @family reference fits
 "fit_cover_calibration_hakai_macro"
 
@@ -66,6 +69,7 @@
 #'   The data are in `fit$data`.
 #' @seealso `kelpbio::kb_fit_cover_calibration_nereo()` and
 #'   [data_in_situ_hakai_nereo] for the surveys.
+#' @template attribution
 #' @family reference fits
 "fit_cover_calibration_hakai_nereo"
 
@@ -81,6 +85,7 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_nitrogen_macro()` and [data_nitrogen_hakai_macro]
 #'   for the data.
+#' @template attribution
 #' @family reference fits
 "fit_nitrogen_hakai_macro"
 
@@ -96,6 +101,7 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_nitrogen_nereo()` and [data_nitrogen_hakai_nereo]
 #'   for the data.
+#' @template attribution
 #' @family reference fits
 "fit_nitrogen_hakai_nereo"
 
@@ -110,6 +116,7 @@
 #'   The data are in `fit$data`.
 #' @seealso `kelpbio::kb_fit_size_nereo()` and [data_size_sample_hakai_nereo]
 #'   for the data.
+#' @template attribution
 #' @family reference fits
 "fit_size_hakai_nereo"
 
@@ -124,6 +131,7 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_weight_macro()` and [data_weight_hakai_macro] for
 #'   the data.
+#' @template attribution
 #' @family reference fits
 "fit_weight_hakai_macro"
 
@@ -139,6 +147,7 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_weight_nereo()` and [data_weight_hakai_nereo] for
 #'   the data.
+#' @template attribution
 #' @family reference fits
 "fit_weight_hakai_nereo"
 
@@ -154,6 +163,7 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_wetdry_macro()` and [data_wetdry_hakai_macro] for
 #'   the data.
+#' @template attribution
 #' @family reference fits
 "fit_wetdry_hakai_macro"
 
@@ -169,5 +179,6 @@
 #'   `fit$data`.
 #' @seealso `kelpbio::kb_fit_wetdry_nereo()` and [data_wetdry_hakai_nereo] for
 #'   the data.
+#' @template attribution
 #' @family reference fits
 "fit_wetdry_hakai_nereo"

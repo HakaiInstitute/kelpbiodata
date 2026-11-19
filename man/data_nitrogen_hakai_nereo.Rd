@@ -21,6 +21,11 @@ data_nitrogen_hakai_nereo
 Sample and nitrogen masses of Hakai Institute tissue samples in British
 Columbia, all months and tissues pooled, one row per dried tissue sample.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \link{fit_nitrogen_hakai_nereo} for the fit to this dataset.
 

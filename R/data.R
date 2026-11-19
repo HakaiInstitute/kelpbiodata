@@ -11,6 +11,7 @@
 #' }
 #' @source Hakai Institute, unpublished tissue isotope data.
 #' @seealso [fit_carbon_hakai_macro] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_carbon_hakai_macro"
 
@@ -27,6 +28,7 @@
 #' }
 #' @source Hakai Institute, unpublished tissue isotope data.
 #' @seealso [fit_carbon_hakai_nereo] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_carbon_hakai_nereo"
 
@@ -57,6 +59,7 @@
 #'   plot polygons and the 2025 tide heights are unpublished.
 #' @seealso [fit_cover_calibration_hakai_macro], calibrated to the biomass of
 #'   these surveys.
+#' @template attribution
 #' @family reference datasets
 "data_in_situ_hakai_macro"
 
@@ -87,6 +90,7 @@
 #'   plot polygons and the 2025 tide heights are unpublished.
 #' @seealso [fit_cover_calibration_hakai_nereo], calibrated to the biomass of
 #'   these surveys.
+#' @template attribution
 #' @family reference datasets
 "data_in_situ_hakai_nereo"
 
@@ -103,6 +107,7 @@
 #' }
 #' @source Hakai Institute, unpublished tissue isotope data.
 #' @seealso [fit_nitrogen_hakai_macro] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_nitrogen_hakai_macro"
 
@@ -119,6 +124,7 @@
 #' }
 #' @source Hakai Institute, unpublished tissue isotope data.
 #' @seealso [fit_nitrogen_hakai_nereo] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_nitrogen_hakai_nereo"
 
@@ -141,6 +147,7 @@
 #'   1.4.0, <https://doi.org/10.21966/k88j-1k50>.
 #' @seealso [fit_cover_calibration_hakai_macro], calibrated to the biomass of
 #'   these surveys.
+#' @template attribution
 #' @family reference datasets
 "data_size_census_hakai_macro"
 
@@ -159,6 +166,7 @@
 #' @source Hakai Institute, *Nereocystis* kelp canopy productivity, version
 #'   1.3.0, <https://doi.org/10.21966/d1s2-s530>.
 #' @seealso [fit_size_hakai_nereo] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_size_sample_hakai_nereo"
 
@@ -178,6 +186,7 @@
 #' @source Hakai Institute, *Macrocystis* kelp canopy productivity, version
 #'   1.4.0, <https://doi.org/10.21966/k88j-1k50>.
 #' @seealso [fit_weight_hakai_macro] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_weight_hakai_macro"
 
@@ -198,6 +207,7 @@
 #' @source Hakai Institute, *Nereocystis* kelp canopy productivity, version
 #'   1.3.0, <https://doi.org/10.21966/d1s2-s530>.
 #' @seealso [fit_weight_hakai_nereo] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_weight_hakai_nereo"
 
@@ -215,6 +225,7 @@
 #' @source Hakai Institute, *Macrocystis* kelp canopy productivity, version
 #'   1.4.0, <https://doi.org/10.21966/k88j-1k50>.
 #' @seealso [fit_wetdry_hakai_macro] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_wetdry_hakai_macro"
 
@@ -232,5 +243,6 @@
 #' @source Hakai Institute, *Macrocystis* kelp canopy productivity, version
 #'   1.4.0, <https://doi.org/10.21966/k88j-1k50>.
 #' @seealso [fit_wetdry_hakai_nereo] for the fit to this dataset.
+#' @template attribution
 #' @family reference datasets
 "data_wetdry_hakai_nereo"

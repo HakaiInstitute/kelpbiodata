@@ -4,8 +4,9 @@ Version: 0.0.0.9000
 Authors@R: c(
     person("Seb", "Dalgarno", , "seb@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3658-4517")),
-    person("Tula Foundation", role = c("fnd", "cph")),
-    person("Hakai Institute", role = "dtc")
+    person("Tula Foundation", role = c("fnd", "cph", "dtc"),
+           comment = "Hakai Institute"),
+    person("Heiltsuk Integrated Resource Management Department", role = "dtc")
   )
 Description: Field survey datasets for Nereocystis luetkeana and
     Macrocystis pyrifera from the Hakai Institute in British Columbia, and

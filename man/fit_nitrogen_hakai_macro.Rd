@@ -17,6 +17,11 @@ A fit of \code{kelpbio::kb_fit_nitrogen_macro()} to Hakai Institute tissue sampl
 in British Columbia, all months and tissues pooled, for converting dry
 biomass to nitrogen without fitting a nitrogen model.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \code{kelpbio::kb_fit_nitrogen_macro()} and \link{data_nitrogen_hakai_macro}
 for the data.

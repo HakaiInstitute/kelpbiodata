@@ -16,6 +16,11 @@ fit_weight_hakai_macro
 A fit of \code{kelpbio::kb_fit_weight_macro()} to plants harvested by the Hakai
 Institute in British Columbia.
 }
+\section{Attribution}{
+
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+}
+
 \seealso{
 \code{kelpbio::kb_fit_weight_macro()} and \link{data_weight_hakai_macro} for
 the data.
