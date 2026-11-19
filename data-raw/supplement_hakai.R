@@ -5,7 +5,7 @@
 #   KELPBIODATA_LOCAL=<dir> KELPBIODATA_SITE_KEY=<csv> \
 #     Rscript data-raw/supplement_hakai.R
 #
-# KELPBIODATA_LOCAL is the 2025 Hakai data delivery (hakai-kelp-biomass/2025);
+# KELPBIODATA_LOCAL is the directory of the unpublished Hakai Institute files;
 # KELPBIODATA_SITE_KEY is the private site key (see data-raw/site_key.R).
 # Requires GDAL's ogr2ogr on the PATH and the sf package.
 #
@@ -20,14 +20,12 @@
 #
 # The canopy is from the drone package (kelp-drone-mapping-data v1.0,
 # doi:10.21966/9cbv-ra30) for 2015 to 2024 and from the per-site 2025
-# shapefiles of the delivery. The cleaning follows the hakai-kelp-biomass-25
-# analysis project (read-cover-spatial.R, clean-cover-*.R, tidy-cover-*.R and
-# tidy-cover-spatial-*.R), as commented below.
+# shapefiles in KELPBIODATA_LOCAL.
 
 local_dir <- Sys.getenv("KELPBIODATA_LOCAL")
 if (!nzchar(local_dir) || !dir.exists(local_dir)) {
   stop(
-    "Set KELPBIODATA_LOCAL to the directory of the 2025 Hakai data delivery.",
+    "Set KELPBIODATA_LOCAL to the directory of the unpublished Hakai Institute files.",
     call. = FALSE
   )
 }
@@ -267,7 +265,7 @@ plot_canopy <- function(species, plots) {
     dplyr::inner_join(surveys, by = c("site", "year", "month"))
 }
 
-# HAK042 is a Macrocystis plot, left out for Nereocystis (client, 2026-09).
+# HAK042 is a Macrocystis plot and is left out for Nereocystis.
 # "Mixed" canopy belongs to neither species.
 plot_canopy_hakai <- dplyr::bind_rows(
   nereo = plot_canopy("Nereocystis luetkeana", dplyr::filter(plots, site != "HAK042")),

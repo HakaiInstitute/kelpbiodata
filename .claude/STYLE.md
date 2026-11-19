@@ -1,6 +1,6 @@
 # kelpbiodata documentation style
 
-How kelpbiodata's reader-facing text is written: the roxygen of the reference fits and datasets (`R/fits.R`), DESCRIPTION, and README. kelpbio's `STYLE.md` (`~/Code/HakaiInstitute/kelpbio/.claude/STYLE.md`) applies in full: its principles, vocabulary, and mechanics. This file adds the templates for this package's topics.
+How kelpbiodata's reader-facing text is written: the roxygen of the reference fits and datasets (`R/fits.R`), DESCRIPTION, and README. kelpbio's `STYLE.md` applies in full: its principles, vocabulary, and mechanics. This file adds the templates for this package's topics.
 
 ## Templates
 

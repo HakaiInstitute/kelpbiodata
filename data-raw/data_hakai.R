@@ -6,7 +6,6 @@
 #   KELPBIODATA_SITE_KEY=<csv> Rscript data-raw/data_hakai.R
 #
 # Sites are written as IDs from the private site key (see data-raw/site_key.R).
-# Cleaning rules follow the hakai-kelp-biomass-25 analysis project.
 
 source("data-raw/site_key.R")
 
