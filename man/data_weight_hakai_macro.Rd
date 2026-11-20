@@ -26,7 +26,7 @@ British Columbia, one row per plant.
 }
 \section{Attribution}{
 
-The Hakai Institute data in this package were collected in collaboration with the Heiltsuk First Nation on Heiltsuk territory. Please credit the Heiltsuk Integrated Resource Management Department and the Hakai Institute in any outputs that use these data.
+The Hakai Institute data in this package were collected in collaboration with Heiltsuk Integrated Resource Management Department (HIRMD) within Haíɫzaqv (Heiltsuk) territory. Any outputs that use these data should credit the Hakai Institute and the Heiltsuk Integrated Resource Management Department (HIRMD). To learn more about resource management or to conduct research, including of kelp forests, in Haíɫzaqv (Heiltsuk) territory, contact hirmd.ca.
 }
 
 \seealso{

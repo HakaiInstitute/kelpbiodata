@@ -53,10 +53,13 @@ reference site, under its code, shares its site effect. A prefix, as in
 ## Attribution
 
 The Hakai Institute data in this package were collected in collaboration
-with the Heiltsuk First Nation on Heiltsuk territory. Please credit the
-Heiltsuk Integrated Resource Management Department and the Hakai
-Institute in any outputs that use these data. The statement is also
-returned by `kelpbiodata_attribution()`.
+with Heiltsuk Integrated Resource Management Department (HIRMD) within
+Haíɫzaqv (Heiltsuk) territory. Any outputs that use these data should
+credit the Hakai Institute and the Heiltsuk Integrated Resource
+Management Department (HIRMD). To learn more about resource management
+or to conduct research, including of kelp forests, in Haíɫzaqv
+(Heiltsuk) territory, contact hirmd.ca. The statement is also returned
+by `kelpbiodata_attribution()`.
 
 ## Citation
 
@@ -90,9 +93,12 @@ citation("kelpbiodata")
 #>   1.0.
 #> 
 #> The Hakai Institute data in this package were collected in
-#> collaboration with the Heiltsuk First Nation on Heiltsuk territory.
-#> Please credit the Heiltsuk Integrated Resource Management Department
-#> and the Hakai Institute in any outputs that use these data.
+#> collaboration with Heiltsuk Integrated Resource Management Department
+#> (HIRMD) within Haíɫzaqv (Heiltsuk) territory. Any outputs that use
+#> these data should credit the Hakai Institute and the Heiltsuk
+#> Integrated Resource Management Department (HIRMD). To learn more about
+#> resource management or to conduct research, including of kelp forests,
+#> in Haíɫzaqv (Heiltsuk) territory, contact hirmd.ca.
 #> 
 #> To see these entries in BibTeX format, use 'print(<citation>,
 #> bibtex=TRUE)', 'toBibtex(.)', or set
