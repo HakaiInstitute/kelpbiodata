@@ -131,7 +131,7 @@ canopy_drone <- canopy_drone |>
 # The 2025 canopy is delivered per site as "YYYYMMDD_Region_Site_rgb_kelp"
 # shapefiles, which carry no provenance fields: the flight date comes from the
 # file name, and the site from the plot the canopy falls in. A missing species
-# label (5 features at WestBeach2ndBeach) is recovered from the classification
+# label (5 features at site HAK040) is recovered from the classification
 # code it is derived from (2 Macrocystis, 3 Nereocystis), spelled "value",
 # "Value" or "gridcode". The .prj files of some carry a spurious vertical CRS,
 # so the CRS is set (NAD83(CSRS) / UTM 9N) rather than read.
