@@ -1,0 +1,28 @@
+Package: kelpbiodata
+Title: Kelp Biomass Data and Reference Model Fits for 'kelpbio'
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Seb", "Dalgarno", , "seb@poissonconsulting.ca", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-3658-4517")),
+    person("Tula Foundation", role = c("fnd", "cph", "dtc"),
+           comment = "Hakai Institute"),
+    person("Heiltsuk Integrated Resource Management Department", role = "dtc")
+  )
+Description: Field survey datasets for Nereocystis luetkeana and
+    Macrocystis pyrifera from the Hakai Institute in British Columbia, and
+    models fitted to them with the 'kelpbio' package.
+License: MIT + file LICENSE
+URL: https://github.com/HakaiInstitute/kelpbiodata,
+    https://hakaiinstitute.github.io/kelpbiodata/
+BugReports: https://github.com/HakaiInstitute/kelpbiodata/issues
+Depends:
+    R (>= 4.2.0)
+Suggests:
+    kelpbio
+Remotes:
+    HakaiInstitute/kelpbio
+Config/roxygen2/version: 8.1.0.9000
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
