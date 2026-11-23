@@ -6,6 +6,8 @@
 \alias{kelpbiodata-package}
 \title{kelpbiodata: Kelp Biomass Data and Reference Model Fits for 'kelpbio'}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 Field survey datasets for Nereocystis luetkeana and Macrocystis pyrifera from the Hakai Institute in British Columbia, and models fitted to them with the 'kelpbio' package.
 }
 \seealso{
