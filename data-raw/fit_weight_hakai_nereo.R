@@ -13,7 +13,6 @@ load("data/data_weight_hakai_nereo.rda")
 fit_weight_hakai_nereo <- kelpbio::kb_fit_weight_nereo(
   data_weight_hakai_nereo,
   nthin = 2L,
-  cores = 4L,
   progress = "bar",
   seed = 42L,
   control = list(adapt_delta = 0.99)

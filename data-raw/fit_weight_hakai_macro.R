@@ -12,7 +12,6 @@ load("data/data_weight_hakai_macro.rda")
 
 fit_weight_hakai_macro <- kelpbio::kb_fit_weight_macro(
   data_weight_hakai_macro,
-  cores = 4L,
   progress = "bar",
   seed = 42L
 )

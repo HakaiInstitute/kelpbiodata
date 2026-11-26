@@ -12,7 +12,6 @@ load("data/data_size_sample_hakai_nereo.rda")
 
 fit_size_hakai_nereo <- kelpbio::kb_fit_size_nereo(
   data_size_sample_hakai_nereo,
-  cores = 4L,
   progress = "bar",
   seed = 42L,
   control = list(adapt_delta = 0.99)

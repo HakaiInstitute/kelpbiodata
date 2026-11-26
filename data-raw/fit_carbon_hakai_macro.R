@@ -12,7 +12,6 @@ load("data/data_carbon_hakai_macro.rda")
 
 fit_carbon_hakai_macro <- kelpbio::kb_fit_carbon_macro(
   data_carbon_hakai_macro,
-  cores = 4L,
   progress = "bar",
   seed = 42L
 )

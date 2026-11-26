@@ -46,7 +46,6 @@ fit_cover_calibration_hakai_macro <- kelpbio::kb_fit_cover_calibration_macro(
   biomass,
   control = list(adapt_delta = 0.99),
   nthin = 2L,
-  cores = 4L,
   progress = "bar",
   seed = 42L
 )

@@ -12,7 +12,6 @@ load("data/data_wetdry_hakai_nereo.rda")
 
 fit_wetdry_hakai_nereo <- kelpbio::kb_fit_wetdry_nereo(
   data_wetdry_hakai_nereo,
-  cores = 4L,
   progress = "bar",
   seed = 42L
 )

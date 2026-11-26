@@ -12,7 +12,6 @@ load("data/data_nitrogen_hakai_macro.rda")
 
 fit_nitrogen_hakai_macro <- kelpbio::kb_fit_nitrogen_macro(
   data_nitrogen_hakai_macro,
-  cores = 4L,
   progress = "bar",
   seed = 42L
 )

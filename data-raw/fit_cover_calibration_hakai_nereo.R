@@ -29,7 +29,6 @@ biomass <- kelpbio::kb_predict_biomass_in_situ(
 fit_cover_calibration_hakai_nereo <- kelpbio::kb_fit_cover_calibration_nereo(
   biomass,
   nthin = 2L,
-  cores = 4L,
   progress = "bar",
   seed = 42L,
   control = list(adapt_delta = 0.99)

@@ -12,7 +12,6 @@ load("data/data_carbon_hakai_nereo.rda")
 
 fit_carbon_hakai_nereo <- kelpbio::kb_fit_carbon_nereo(
   data_carbon_hakai_nereo,
-  cores = 4L,
   progress = "bar",
   seed = 42L
 )
