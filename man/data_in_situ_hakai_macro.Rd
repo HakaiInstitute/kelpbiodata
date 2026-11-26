@@ -36,7 +36,7 @@ Sites are identified by code.
 }
 \section{Attribution}{
 
-The Hakai Institute data in this package were collected in collaboration with Heiltsuk Integrated Resource Management Department (HIRMD) within Haíɫzaqv (Heiltsuk) territory. Any outputs that use these data should credit the Hakai Institute and the Heiltsuk Integrated Resource Management Department (HIRMD). To learn more about resource management or to conduct research, including of kelp forests, in Haíɫzaqv (Heiltsuk) territory, contact hirmd.ca.
+The Hakai Institute data in this package were collected in collaboration with the Heiltsuk Integrated Resource Management Department (HIRMD) within Haíɫzaqv (Heiltsuk) territory. Any outputs using these data should credit both the Hakai Institute and HIRMD. To learn more about resource management or conducting research in Haíɫzaqv territory, including on kelp forests, visit \href{https://hirmd.ca/}{hirmd.ca}.
 }
 
 \seealso{
