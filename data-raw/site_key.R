@@ -21,9 +21,10 @@ site_id <- function(site) {
   key <- read_site_key()
   new <- setdiff(sort(unique(as.character(site[!is.na(site)]))), key$site)
   if (length(new) > 0) {
-    prefix <- dplyr::if_else(grepl("HIRMD", new), "HEI", "HAK")
+    prefix <- dplyr::if_else(stringr::str_detect(new, "HIRMD"), "HEI", "HAK")
     used <- function(p) {
-      n <- as.integer(sub(p, "", key$site_id[startsWith(key$site_id, p)]))
+      ids <- key$site_id[stringr::str_starts(key$site_id, p)]
+      n <- as.integer(stringr::str_remove(ids, p))
       max(c(0L, n))
     }
     number <- integer(length(new))
@@ -32,7 +33,7 @@ site_id <- function(site) {
     }
     key <- dplyr::bind_rows(
       key,
-      tibble::tibble(site = new, site_id = sprintf("%s%03d", prefix, number))
+      tibble::tibble(site = new, site_id = stringr::str_c(prefix, stringr::str_pad(number, 3, pad = "0")))
     )
     readr::write_csv(key, site_key_path)
     message(length(new), " new site(s) added to the site key.")

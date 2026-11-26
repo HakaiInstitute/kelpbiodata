@@ -27,7 +27,7 @@ read_pkg <- function(pkg, file, ...) {
   path <- file.path(download_dir, pkg$repo, pkg$tag, file)
   if (!file.exists(path)) {
     dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
-    url <- paste(
+    url <- stringr::str_c(
       "https://raw.githubusercontent.com/HakaiInstitute",
       pkg$repo,
       pkg$tag,
@@ -60,17 +60,13 @@ month_of <- function(date) as.integer(format(date, "%m"))
 
 write_real <- function(data, name) {
   dir.create("data-raw/real", showWarnings = FALSE)
-  readr::write_csv(data, file.path("data-raw/real", paste0(name, ".csv")))
+  readr::write_csv(data, file.path("data-raw/real", stringr::str_c(name, ".csv")))
 }
 
 drop_outliers <- function(data, weight, predictor) {
   fit <- stats::lm(
-    stats::as.formula(paste0(
-      "log(",
-      weight,
-      ") ~ poly(log(",
-      predictor,
-      "), 2)"
+    stats::as.formula(stringr::str_glue(
+      "log({weight}) ~ poly(log({predictor}), 2)"
     )),
     data = data
   )
@@ -143,8 +139,8 @@ wetdry_hakai <- read_pkg(
 ) |>
   dplyr::mutate(
     tray_wet = dplyr::if_else(
-      grepl("^-?[0-9]+(\\.[0-9]+)?$", tray_wet) &
-        !grepl("wrong wet weight", dplyr::coalesce(comments, "")),
+      stringr::str_detect(tray_wet, "^-?[0-9]+(\\.[0-9]+)?$") &
+        !stringr::str_detect(dplyr::coalesce(comments, ""), "wrong wet weight"),
       tray_wet,
       NA_character_
     ),
@@ -157,7 +153,7 @@ wetdry_hakai <- read_pkg(
     !is.na(dry_mass),
     wet_mass > 0,
     dry_mass > 0,
-    !grepl("griswold", dplyr::coalesce(comments, "")),
+    !stringr::str_detect(dplyr::coalesce(comments, ""), "griswold"),
     dry_ratio > 0.02,
     dry_ratio < 0.5
   )
@@ -222,11 +218,13 @@ nitrogen_hakai_macro <- nitrogen_hakai("MACP")
 harvest_macro <- read_pkg(macro_pkg, "macro_harvest.csv") |>
   dplyr::filter(year_of(date) != 2014) |>
   dplyr::mutate(
-    extra_plant = grepl("extra biomass for plant", Notes, ignore.case = TRUE),
-    extra_site = grepl(
-      "extra biomass for the entire site",
-      Notes,
-      ignore.case = TRUE
+    extra_plant = stringr::str_detect(
+      dplyr::coalesce(Notes, ""),
+      stringr::regex("extra biomass for plant", ignore_case = TRUE)
+    ),
+    extra_site = stringr::str_detect(
+      dplyr::coalesce(Notes, ""),
+      stringr::regex("extra biomass for the entire site", ignore_case = TRUE)
     )
   )
 
@@ -303,7 +301,7 @@ dives_nereo <- read_pkg(nereo_pkg, "nereo_density.csv") |>
 survey_hakai_nereo <- pair_dives("nereo", dives_nereo) |>
   dplyr::anti_join(cbl_only_nereo, by = c("site", "year")) |>
   dplyr::transmute(
-    survey_id = paste(site, year),
+    survey_id = stringr::str_c(site, year, sep = " "),
     site,
     year,
     survey_area_m2,
@@ -364,7 +362,7 @@ dives_macro <- transects_macro |>
 # with two surveys a year, each identified by its plot.
 survey_hakai_macro <- pair_dives("macro", dives_macro) |>
   dplyr::transmute(
-    survey_id = paste(site, year),
+    survey_id = stringr::str_c(site, year, sep = " "),
     plot = site,
     site = dplyr::if_else(
       site %in% c("HAK011", "HAK042"),

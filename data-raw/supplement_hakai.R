@@ -55,7 +55,7 @@ readr::read_csv(file.path(local_dir, "kelp_isotopes.csv"), na = c("", "NA")) |>
 
 # Drone package ----------------------------------------------------------------
 
-drone_url <- paste0(
+drone_url <- stringr::str_c(
   "https://raw.githubusercontent.com/HakaiInstitute/kelp-drone-mapping-data/",
   "v1.0/data/CentralCoast_SeasonalDroneKelpPolygons.gdb.zip"
 )
@@ -69,7 +69,7 @@ gdb <- file.path(drone_dir, "CentralCoast_SeasonalDroneKelpPolygons.gdb")
 # sf's GDAL fails to read the canopy layer of the geodatabase, while ogr2ogr
 # reads it, so both layers are converted to GeoPackages first.
 convert_layer <- function(layer) {
-  gpkg <- file.path(drone_dir, paste0(layer, ".gpkg"))
+  gpkg <- file.path(drone_dir, stringr::str_c(layer, ".gpkg"))
   args <- c(
     "-f", "GPKG", "-overwrite", gpkg, gdb, layer,
     "-nlt", "CONVERT_TO_LINEAR", "-dim", "XY"
@@ -87,12 +87,12 @@ aoi_gpkg <- convert_layer("Hakai_Drone_AOIs")
 # every value.
 species_levels <- c("Macrocystis pyrifera", "Nereocystis luetkeana", "Mixed")
 clean_species <- function(x) {
-  x <- tolower(trimws(x))
+  x <- stringr::str_to_lower(stringr::str_trim(x))
   factor(
     dplyr::case_when(
-      startsWith(x, "mac") ~ "Macrocystis pyrifera",
-      startsWith(x, "ner") ~ "Nereocystis luetkeana",
-      grepl("mix", x) ~ "Mixed"
+      stringr::str_starts(x, "mac") ~ "Macrocystis pyrifera",
+      stringr::str_starts(x, "ner") ~ "Nereocystis luetkeana",
+      stringr::str_detect(x, "mix") ~ "Mixed"
     ),
     levels = species_levels
   )
@@ -136,9 +136,9 @@ canopy_drone <- canopy_drone |>
 # "Value" or "gridcode". The .prj files of some carry a spurious vertical CRS,
 # so the CRS is set (NAD83(CSRS) / UTM 9N) rather than read.
 read_canopy_2025 <- function(file) {
-  date <- as.Date(substr(basename(file), 1, 8), format = "%Y%m%d")
+  date <- as.Date(stringr::str_sub(basename(file), 1, 8), format = "%Y%m%d")
   x <- sf::st_read(file, quiet = TRUE)
-  code_col <- names(x)[tolower(names(x)) %in% c("value", "gridcode")][1]
+  code_col <- names(x)[stringr::str_to_lower(names(x)) %in% c("value", "gridcode")][1]
   coded <- factor(
     dplyr::case_when(x[[code_col]] == 2 ~ species_levels[1],
       x[[code_col]] == 3 ~ species_levels[2]
@@ -181,7 +181,10 @@ plots <- list.files(
   ignore.case = TRUE
 ) |>
   lapply(function(file) {
-    stem <- sub("(?i)_plot.*$", "", tools::file_path_sans_ext(basename(file)), perl = TRUE)
+    stem <- stringr::str_remove(
+      tools::file_path_sans_ext(basename(file)),
+      stringr::regex("_plot.*$", ignore_case = TRUE)
+    )
     sf::st_read(file, quiet = TRUE) |>
       sf::st_zm() |>
       sf::st_transform(sf::st_crs(canopy)) |>
@@ -223,7 +226,7 @@ surveys <- readr::read_csv(
     month,
     tide_sheet_m = as.numeric(tide_height_m)
   ) |>
-  dplyr::filter(!startsWith(site, "HEI"), !is.na(date_drone), !is.na(month))
+  dplyr::filter(!stringr::str_starts(site, "HEI"), !is.na(date_drone), !is.na(month))
 stopifnot(!anyDuplicated(surveys[c("site", "year", "month")]))
 
 surveys <- surveys |>
@@ -236,9 +239,13 @@ surveys <- surveys |>
 # the drone mapped canopy of the species in the drone footprint (AOI) holding
 # the plot; it then has zero canopy in the plot if none falls inside it.
 plot_canopy <- function(species, plots) {
-  canopy_sp <- canopy[canopy$species == species, ]
+  # Plot and canopy attributes apply to every part of a geometry, so sf can
+  # carry them through intersections without warning.
+  plots <- sf::st_set_agr(plots, "constant")
+  canopy_sp <- canopy[canopy$species == species, ] |>
+    sf::st_set_agr("constant")
 
-  in_plot <- suppressWarnings(sf::st_intersection(plots, canopy_sp))
+  in_plot <- sf::st_intersection(plots, canopy_sp)
   in_plot$area <- as.numeric(sf::st_area(in_plot))
   in_plot <- in_plot |>
     sf::st_drop_geometry() |>
@@ -247,10 +254,11 @@ plot_canopy <- function(species, plots) {
       .by = c(site, year, month)
     )
 
-  plot_points <- suppressWarnings(sf::st_point_on_surface(plots))
+  plot_points <- sf::st_point_on_surface(plots)
   footprints <- sf::st_join(aois, plot_points, left = FALSE) |>
-    dplyr::select(site)
-  in_footprint <- suppressWarnings(sf::st_intersection(footprints, canopy_sp)) |>
+    dplyr::select(site) |>
+    sf::st_set_agr("constant")
+  in_footprint <- sf::st_intersection(footprints, canopy_sp) |>
     sf::st_drop_geometry() |>
     dplyr::distinct(site, year, month)
 
