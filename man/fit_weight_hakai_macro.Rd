@@ -19,6 +19,9 @@ Institute in British Columbia.
 \section{Attribution}{
 
 The Hakai Institute data in this package were collected in collaboration with the Heiltsuk Integrated Resource Management Department (HIRMD) within Haíɫzaqv (Heiltsuk) territory. Any outputs using these data should credit both the Hakai Institute and HIRMD. To learn more about resource management or conducting research in Haíɫzaqv territory, including on kelp forests, visit \href{https://hirmd.ca/}{hirmd.ca}.
+
+Licensed under
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
 }
 
 \seealso{

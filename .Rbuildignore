@@ -7,6 +7,7 @@
 ^pkgdown$
 ^scripts$
 ^LICENSE\.md$
+^LICENSE-DATA\.md$
 ^_pkgdown\.yml$
 ^README\.Rmd$
 ^\.claude$

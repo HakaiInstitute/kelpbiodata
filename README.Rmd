@@ -77,4 +77,5 @@ citation("kelpbiodata")
 
 Copyright 2026 Tula Foundation.
 
-The code and data are released under the [MIT License](LICENSE.md).
+The code is released under the [MIT License](LICENSE.md).
+The datasets and reference fits are released under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](LICENSE-DATA.md); see [Attribution](#attribution) for the required credit.
