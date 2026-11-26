@@ -8,9 +8,8 @@ Authors@R: c(
            comment = "Hakai Institute"),
     person("Heiltsuk Integrated Resource Management Department", role = "dtc")
   )
-Description: Field survey datasets for Nereocystis luetkeana and
-    Macrocystis pyrifera from the Hakai Institute in British Columbia, and
-    models fitted to them with the 'kelpbio' package.
+Description: Field survey public datasets for Nereocystis luetkeana and
+    Macrocystis pyrifera, and models fitted to them with the 'kelpbio' package.
 License: MIT + file LICENSE
 URL: https://github.com/HakaiInstitute/kelpbiodata,
     https://hakaiinstitute.github.io/kelpbiodata/
