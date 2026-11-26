@@ -12,7 +12,7 @@ if (!nzchar(site_key_path)) {
 
 read_site_key <- function() {
   if (!file.exists(site_key_path)) {
-    return(tibble::tibble(site = character(), site_id = character()))
+    stop("No site key at KELPBIODATA_SITE_KEY: ", site_key_path, call. = FALSE)
   }
   readr::read_csv(site_key_path, col_types = "cc", progress = FALSE)
 }
