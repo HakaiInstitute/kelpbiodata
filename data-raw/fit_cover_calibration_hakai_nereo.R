@@ -6,11 +6,15 @@
 # fit_size_hakai_nereo.
 # Reproducibility comes from the seeds.
 #
-# Requires kelpbio installed at the version the fit is for. Re-run whenever
+# Requires kelpbio installed from GitHub at the commit the fit is for; the
+# commit is saved as the fit's kelpbio_commit attribute. Re-run whenever
 # kelpbio changes the model or the kb_fit object structure, the data change, or
 # fit_weight_hakai_nereo or fit_size_hakai_nereo is rebuilt.
 # Run from the package root:
 #   Rscript data-raw/fit_cover_calibration_hakai_nereo.R
+
+source("data-raw/kelpbio_commit.R")
+commit <- kelpbio_commit()
 
 load("data/fit_weight_hakai_nereo.rda")
 load("data/fit_size_hakai_nereo.rda")
@@ -33,5 +37,7 @@ fit_cover_calibration_hakai_nereo <- kelpbio::kb_fit_cover_calibration_nereo(
   seed = 42L,
   control = list(adapt_delta = 0.99)
 )
+
+attr(fit_cover_calibration_hakai_nereo, "kelpbio_commit") <- commit
 
 usethis::use_data(fit_cover_calibration_hakai_nereo, overwrite = TRUE)
