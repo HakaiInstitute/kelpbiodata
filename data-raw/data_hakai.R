@@ -123,15 +123,17 @@ size_sample_hakai_nereo <- dplyr::bind_rows(
 # Site-years sized only by cumulative blade length, which kelpbio cannot use;
 # their surveys are dropped.
 cbl_only_nereo <- read_pkg(nereo_pkg, "nereo_metrics.csv") |>
-  dplyr::mutate(date = as.Date(date1), cbl = bladeL1 * Bcount2) |>
-  dplyr::filter(year_of(date) <= max_year, !is.na(cbl), cbl > 0) |>
+  dplyr::mutate(date = as.Date(date1)) |>
+  dplyr::filter(year_of(date) <= max_year, !is.na(bladeL1), bladeL1 > 0) |>
   dplyr::distinct(site = site_id(site), year = year_of(date)) |>
   dplyr::anti_join(size_sample_hakai_nereo, by = c("site", "year"))
 
 # Wet/dry ----------------------------------------------------------------------
 
 # Tray masses are in mg. Suspect wet masses are flagged by text in tray_wet or
-# the comment "wrong wet weight?"; check new releases for other flags.
+# the comment "wrong wet weight?"; check new releases for other flags. Trays
+# with a comment naming the Griswold lab were weighed on another lab's scale
+# and are dropped.
 wetdry_hakai <- read_pkg(
   macro_pkg,
   "macro_wetdry.csv",
@@ -140,7 +142,10 @@ wetdry_hakai <- read_pkg(
   dplyr::mutate(
     tray_wet = dplyr::if_else(
       stringr::str_detect(tray_wet, "^-?[0-9]+(\\.[0-9]+)?$") &
-        !stringr::str_detect(dplyr::coalesce(comments, ""), "wrong wet weight"),
+        !stringr::str_detect(
+          dplyr::coalesce(comments, ""),
+          stringr::regex("wrong wet weight", ignore_case = TRUE)
+        ),
       tray_wet,
       NA_character_
     ),
@@ -153,7 +158,10 @@ wetdry_hakai <- read_pkg(
     !is.na(dry_mass),
     wet_mass > 0,
     dry_mass > 0,
-    !stringr::str_detect(dplyr::coalesce(comments, ""), "griswold"),
+    !stringr::str_detect(
+      dplyr::coalesce(comments, ""),
+      stringr::regex("griswold", ignore_case = TRUE)
+    ),
     dry_ratio > 0.02,
     dry_ratio < 0.5
   )
@@ -262,7 +270,8 @@ weight_hakai_macro <- plant_fronds_macro |>
 
 # In situ surveys --------------------------------------------------------------
 
-# Pairs each canopy map with the nearest in situ survey within 21 days.
+# Pairs each canopy map (flight date) with the nearest in situ survey of its
+# site and year within 21 days.
 pair_dives <- function(species, dives) {
   read_supplement("plot_canopy_hakai.csv") |>
     dplyr::filter(species == .env$species) |>
@@ -276,7 +285,7 @@ pair_dives <- function(species, dives) {
       abs(lag_days),
       n = 1,
       with_ties = FALSE,
-      by = c(site, year, month)
+      by = c(site, date_drone)
     ) |>
     dplyr::filter(abs(lag_days) <= 21) |>
     dplyr::arrange(site, year)
@@ -317,14 +326,15 @@ density_macro <- read_pkg(macro_pkg, "macro_density.csv") |>
   dplyr::mutate(
     date = if (all(is.na(date))) date else dplyr::coalesce(date, min(date, na.rm = TRUE)),
     .by = c(period, site, transect, side)
-  ) |>
+  )
+stopifnot(!anyNA(density_macro$date))
+density_macro <- density_macro |>
   dplyr::filter(
     year_of(date) <= max_year,
     transect %% 1 == 0,
     !is.na(transect_length)
   ) |>
   dplyr::mutate(site = site_id(site))
-stopifnot(!anyNA(density_macro$date))
 
 # Edge plants (C_P_T "P") count half; transects are 2 m wide.
 transects_macro <- density_macro |>
@@ -399,9 +409,9 @@ census_check_macro <- size_census_hakai_macro |>
     census = sum(dplyr::if_else(partial, 0.5, 1)),
     .by = survey_id
   ) |>
-  dplyr::right_join(survey_hakai_macro, by = "survey_id")
+  dplyr::right_join(survey_hakai_macro, by = "survey_id") |>
+  dplyr::mutate(census = dplyr::coalesce(census, 0))
 stopifnot(
-  !anyNA(census_check_macro$census),
   abs(census_check_macro$census - census_check_macro$plants) <=
     0.5 * census_check_macro$lines
 )

@@ -13,9 +13,9 @@
 #
 # - isotopes_hakai.csv: the carbon and nitrogen of each kelp tissue sample
 #   (kelp_isotopes.csv), trimmed to the columns the build uses.
-# - plot_canopy_hakai.csv: one row per drone survey and species with the area
-#   of the survey plot, the canopy of that species inside it and the tide
-#   height at the flight. The plot polygons are not published, so only these
+# - plot_canopy_hakai.csv: one row per canopy map (site and flight date) and
+#   species with the area of the survey plot, the canopy of that species
+#   inside it and the tide height at the flight. The plot polygons are not published, so only these
 #   summaries are kept; no coordinates are written.
 #
 # The canopy is from the drone package (kelp-drone-mapping-data v1.0,
@@ -113,17 +113,13 @@ as_polygons <- function(x) {
     sf::st_cast("POLYGON", warn = FALSE)
 }
 
-flight_month <- function(date) {
-  month.abb[as.integer(format(date, "%m"))]
-}
-
 canopy_drone <- sf::st_read(canopy_gpkg, quiet = TRUE)
 
 canopy_drone <- canopy_drone |>
   dplyr::transmute(
     species = clean_species(ke_species),
-    year = as.integer(format(img_date, "%Y")),
-    month = flight_month(img_date)
+    date_drone = as.Date(img_date),
+    year = as.integer(format(date_drone, "%Y"))
   ) |>
   as_polygons() |>
   name_geometry()
@@ -150,8 +146,8 @@ read_canopy_2025 <- function(file) {
   x |>
     dplyr::transmute(
       species = dplyr::coalesce(labelled, coded),
-      year = as.integer(format(date, "%Y")),
-      month = flight_month(date)
+      date_drone = date,
+      year = as.integer(format(date, "%Y"))
     ) |>
     sf::st_zm() |>
     sf::st_set_crs(3156) |>
@@ -227,17 +223,53 @@ surveys <- readr::read_csv(
     tide_sheet_m = as.numeric(tide_height_m)
   ) |>
   dplyr::filter(!stringr::str_starts(site, "HEI"), !is.na(date_drone), !is.na(month))
-stopifnot(!anyDuplicated(surveys[c("site", "year", "month")]))
+stopifnot(
+  !anyDuplicated(surveys[c("site", "date_drone")]),
+  !anyDuplicated(surveys[c("site", "year", "month")])
+)
 
 surveys <- surveys |>
   dplyr::rename(tide_height_m = tide_sheet_m) |>
   dplyr::filter(!is.na(tide_height_m))
 
+# A canopy map takes the tide of the sheet row for its site and flight date.
+# Where the sheet dates the flight differently from the canopy (HAK028 and
+# HAK040 2018, HAK033 2019), the map takes the tide of the sheet's otherwise
+# unmatched row for the same site, year, and month. The drone package's own
+# tide for these flights agrees with the sheet, so the sheet dates are the error.
+add_tide <- function(maps) {
+  by_date <- dplyr::inner_join(
+    maps,
+    dplyr::select(surveys, site, date_drone, tide_height_m),
+    by = c("site", "date_drone")
+  )
+  by_month <- maps |>
+    dplyr::anti_join(by_date, by = c("site", "date_drone")) |>
+    dplyr::mutate(month = month.abb[as.integer(format(date_drone, "%m"))]) |>
+    dplyr::inner_join(
+      surveys |>
+        dplyr::anti_join(maps, by = c("site", "date_drone")) |>
+        dplyr::select(site, year, month, tide_height_m),
+      by = c("site", "year", "month")
+    ) |>
+    dplyr::select(-month)
+  if (nrow(by_month) > 0) {
+    message(
+      "Tide by site and month, not date: ",
+      stringr::str_flatten_comma(
+        unique(stringr::str_c(by_month$site, " ", by_month$date_drone))
+      )
+    )
+  }
+  dplyr::bind_rows(by_date, by_month)
+}
+
 # Plot canopy ------------------------------------------------------------------
 
-# The canopy of a species inside each plot, per survey. A survey enters only if
-# the drone mapped canopy of the species in the drone footprint (AOI) holding
-# the plot; it then has zero canopy in the plot if none falls inside it.
+# The canopy of a species inside each plot, per canopy map (flight date). A map
+# enters only if the drone mapped canopy of the species in the drone footprint
+# (AOI) holding the plot; it then has zero canopy in the plot if none falls
+# inside it.
 plot_canopy <- function(species, plots) {
   # Plot and canopy attributes apply to every part of a geometry, so sf can
   # carry them through intersections without warning.
@@ -251,7 +283,7 @@ plot_canopy <- function(species, plots) {
     sf::st_drop_geometry() |>
     dplyr::summarise(
       canopy_area_m2 = sum(area),
-      .by = c(site, year, month)
+      .by = c(site, year, date_drone)
     )
 
   plot_points <- sf::st_point_on_surface(plots)
@@ -260,17 +292,17 @@ plot_canopy <- function(species, plots) {
     sf::st_set_agr("constant")
   in_footprint <- sf::st_intersection(footprints, canopy_sp) |>
     sf::st_drop_geometry() |>
-    dplyr::distinct(site, year, month)
+    dplyr::distinct(site, year, date_drone)
 
   plot_area <- plots |>
     dplyr::mutate(plot_area_m2 = as.numeric(sf::st_area(plots))) |>
     sf::st_drop_geometry()
 
   in_footprint |>
-    dplyr::left_join(in_plot, by = c("site", "year", "month")) |>
+    dplyr::left_join(in_plot, by = c("site", "year", "date_drone")) |>
     dplyr::mutate(canopy_area_m2 = dplyr::coalesce(canopy_area_m2, 0)) |>
     dplyr::inner_join(plot_area, by = "site") |>
-    dplyr::inner_join(surveys, by = c("site", "year", "month"))
+    add_tide()
 }
 
 # HAK042 is a Macrocystis plot and is left out for Nereocystis.
@@ -286,13 +318,12 @@ plot_canopy_hakai <- dplyr::bind_rows(
     species,
     site,
     year,
-    month,
     date_drone,
     tide_height_m,
     plot_area_m2,
     canopy_area_m2
   ) |>
-  dplyr::arrange(species, site, year, month)
-stopifnot(!anyDuplicated(plot_canopy_hakai[c("species", "site", "year", "month")]))
+  dplyr::arrange(species, site, date_drone)
+stopifnot(!anyDuplicated(plot_canopy_hakai[c("species", "site", "date_drone")]))
 
 readr::write_csv(plot_canopy_hakai, file.path(out_dir, "plot_canopy_hakai.csv"))
