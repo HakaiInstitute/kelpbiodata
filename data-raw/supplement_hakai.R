@@ -19,7 +19,8 @@
 #   summaries are kept; no coordinates are written.
 # - site_canopy_hakai.csv: one row per canopy map and species with the area of
 #   the drone footprint and the canopy of that species inside it, for the site
-#   totals.
+#   totals. It is written to KELPBIODATA_LOCAL, not the repository, as only
+#   data-raw/workbook_hakai.R reads it.
 #
 # The canopy is from the drone package (kelp-drone-mapping-data v1.0,
 # doi:10.21966/9cbv-ra30) for 2015 to 2024 and from the per-site 2025
@@ -390,4 +391,4 @@ stopifnot(
   all(site_canopy_hakai$canopy_area_m2 <= site_canopy_hakai$classified_area_m2)
 )
 
-readr::write_csv(site_canopy_hakai, file.path(out_dir, "site_canopy_hakai.csv"))
+readr::write_csv(site_canopy_hakai, file.path(local_dir, "site_canopy_hakai.csv"))

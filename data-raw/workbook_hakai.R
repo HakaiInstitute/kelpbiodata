@@ -3,13 +3,14 @@
 # workbooks hold site names, so they are written outside the repository and
 # never committed:
 #
-#   KELPBIODATA_SITE_KEY=<csv> KELPBIODATA_WORKBOOKS=<dir> \
+#   KELPBIODATA_SITE_KEY=<csv> KELPBIODATA_LOCAL=<dir> KELPBIODATA_WORKBOOKS=<dir> \
 #     Rscript data-raw/workbook_hakai.R
 #
 # Each workbook has the app's sheets (weight, size_sample or size_census,
 # survey_in_situ, survey_canopy, wetdry, carbon, and nitrogen), built from the
-# datasets in data/ and data-raw/supplement/site_canopy_hakai.csv. A site code
-# is written as the first spelling of its site in the key.
+# datasets in data/ and site_canopy_hakai.csv in KELPBIODATA_LOCAL (written by
+# data-raw/supplement_hakai.R). A site code is written as the first spelling of
+# its site in the key.
 
 source("data-raw/site_key.R")
 
@@ -47,8 +48,16 @@ load_data <- function(name) {
   data
 }
 
+local_dir <- Sys.getenv("KELPBIODATA_LOCAL")
+if (!nzchar(local_dir) || !dir.exists(local_dir)) {
+  stop(
+    "Set KELPBIODATA_LOCAL to the directory of the unpublished Hakai Institute files.",
+    call. = FALSE
+  )
+}
+
 site_canopy <- readr::read_csv(
-  "data-raw/supplement/site_canopy_hakai.csv",
+  file.path(local_dir, "site_canopy_hakai.csv"),
   show_col_types = FALSE,
   progress = FALSE
 )
