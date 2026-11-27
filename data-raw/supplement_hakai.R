@@ -17,6 +17,10 @@
 #   species with the area of the survey plot, the canopy of that species
 #   inside it and the tide height at the flight. The plot polygons are not published, so only these
 #   summaries are kept; no coordinates are written.
+# - site_canopy_hakai.csv: one row per canopy map and species with the area of
+#   the drone footprint and the canopy of that species inside it, for the site
+#   totals. It is written to KELPBIODATA_LOCAL, not the repository, as only
+#   data-raw/workbook_hakai.R reads it.
 #
 # The canopy is from the drone package (kelp-drone-mapping-data v1.0,
 # doi:10.21966/9cbv-ra30) for 2015 to 2024 and from the per-site 2025
@@ -327,3 +331,64 @@ plot_canopy_hakai <- dplyr::bind_rows(
 stopifnot(!anyDuplicated(plot_canopy_hakai[c("species", "site", "date_drone")]))
 
 readr::write_csv(plot_canopy_hakai, file.path(out_dir, "plot_canopy_hakai.csv"))
+
+# Site canopy -------------------------------------------------------------------
+
+# The canopy of a species over each drone footprint (AOI) holding a plot, per
+# canopy map, with the footprint's area as the area classified: the site totals
+# canopy biomass is predicted for. Canopy is clipped to the footprint, as the
+# 2025 shapefiles map beyond it. Two footprints hold two plots each, and each
+# footprint's total goes to one site per species: HAK011 and HAK028 for
+# Nereocystis, and HAK012 (the site of plots HAK011 and HAK042) and HAK040 for
+# Macrocystis. A map enters only if the drone mapped canopy of the species in
+# the footprint, as for the plot canopy.
+site_canopy <- function(species, sites) {
+  plot_points <- sf::st_point_on_surface(sf::st_set_agr(plots, "constant"))
+  footprints <- sf::st_join(sf::st_set_agr(aois, "constant"), plot_points, left = FALSE) |>
+    dplyr::filter(site %in% sites) |>
+    dplyr::group_by(site) |>
+    dplyr::summarise(.groups = "drop") |>
+    sf::st_set_agr("constant")
+  footprints$classified_area_m2 <- as.numeric(sf::st_area(footprints))
+
+  canopy_sp <- canopy[canopy$species == species, ] |>
+    sf::st_set_agr("constant")
+  in_footprint <- sf::st_intersection(footprints, canopy_sp)
+  in_footprint$area <- as.numeric(sf::st_area(in_footprint))
+  in_footprint |>
+    sf::st_drop_geometry() |>
+    dplyr::summarise(
+      canopy_area_m2 = sum(area),
+      .by = c(site, year, date_drone, classified_area_m2)
+    ) |>
+    add_tide()
+}
+
+site_canopy_hakai <- dplyr::bind_rows(
+  nereo = site_canopy(
+    "Nereocystis luetkeana",
+    setdiff(plots$site, c("HAK040", "HAK042"))
+  ),
+  macro = site_canopy("Macrocystis pyrifera", setdiff(plots$site, c("HAK011", "HAK028"))) |>
+    dplyr::mutate(site = dplyr::if_else(site == "HAK042", "HAK012", site)),
+  .id = "species"
+) |>
+  dplyr::mutate(
+    dplyr::across(c(classified_area_m2, canopy_area_m2), \(x) round(x, 2))
+  ) |>
+  dplyr::select(
+    species,
+    site,
+    year,
+    date_drone,
+    tide_height_m,
+    classified_area_m2,
+    canopy_area_m2
+  ) |>
+  dplyr::arrange(species, site, date_drone)
+stopifnot(
+  !anyDuplicated(site_canopy_hakai[c("species", "site", "date_drone")]),
+  all(site_canopy_hakai$canopy_area_m2 <= site_canopy_hakai$classified_area_m2)
+)
+
+readr::write_csv(site_canopy_hakai, file.path(local_dir, "site_canopy_hakai.csv"))
