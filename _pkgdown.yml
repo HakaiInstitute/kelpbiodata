@@ -1,0 +1,45 @@
+url: https://hakaiinstitute.github.io/kelpbiodata/
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    primary: "#aa2025"
+    link-color: "#aa2025"
+    navbar-bg: "#2c3e50"
+    navbar-dark: true
+
+reference:
+- title: "Reference datasets"
+  desc: >
+    Hakai Institute data the reference fits were fitted to, with
+    the columns and column types the kelpbio fit functions take.
+  contents:
+    - data_weight_hakai_nereo
+    - data_weight_hakai_macro
+    - data_size_sample_hakai_nereo
+    - data_size_census_hakai_macro
+    - data_in_situ_hakai_nereo
+    - data_in_situ_hakai_macro
+    - data_wetdry_hakai_nereo
+    - data_wetdry_hakai_macro
+    - data_carbon_hakai_nereo
+    - data_carbon_hakai_macro
+    - data_nitrogen_hakai_nereo
+    - data_nitrogen_hakai_macro
+- title: "Attribution"
+  contents:
+    - kelpbiodata_attribution
+- title: "Reference fits"
+  desc: "Models fitted with kelpbio to Hakai Institute data."
+  contents:
+    - fit_weight_hakai_nereo
+    - fit_weight_hakai_macro
+    - fit_size_hakai_nereo
+    - fit_wetdry_hakai_nereo
+    - fit_wetdry_hakai_macro
+    - fit_carbon_hakai_nereo
+    - fit_carbon_hakai_macro
+    - fit_nitrogen_hakai_nereo
+    - fit_nitrogen_hakai_macro
+    - fit_cover_calibration_hakai_nereo
+    - fit_cover_calibration_hakai_macro
